@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="chat-list">
+    <% if @chats.length != 0 %>
+      <% @chats.each do |chat| %>
+        <div class="row chats">
+          <% if chat.user.id != session[:user]['id'] and session[:user]['role'] != 'admin' %>
+            <!-- opposite man's chat -->
+            <div class="col-md-11">
+              <div class="col-md-2 testimonial testimonial-style-3" style="padding-right:0; margin-bottom:1px;">
+                <div class="testimonial-author">
+                  <div class="testimonial-author-thumbnail">
+                    <img src='<%= @baseUrl_userImage+chat.user.image_url %>' class="image-responsive" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 testimonial testimonial-style-3" style="margin-top:15px; margin-bottom:0px;">
+                <div class="testimonial-arrow-left"></div>
+                <blockquote>
+                  <p>
+                    <%= chat.content %>
+                  </p>
+                </blockquote>
+                <small><%= chat.created_at.to_datetime.strftime('%Y-%m-%d %H:%M') %></small>
+              </div>
+            </div>
+          <% elsif session[:user]['role'] != 'admin' %>
+            <!-- myself's chat -->
+            <div class="col-md-10 pull-right" style="margin-right:10px">
+              <div class="testimonial testimonial-primary" style="margin-bottom:0px;">
+                <blockquote>
+                  <p><%= chat.content %></p>
+                </blockquote>
+              </div>
+              <small><%= chat.created_at.to_datetime.strftime('%Y-%m-%d %H:%M') %></small>
+            </div>
+          <% else %>
+            <!-- all contents with user_name for Admin  -->
+            <div class="col-md-10 pull-right" style="margin-right:10px">
+              <div class="testimonial testimonial-primary" style="margin-bottom:0px;">
+                  <blockquote>
+                    <p><%= chat.content %></p>
+                  </blockquote>
+                </div>
+                <small><%= chat.created_at.to_datetime.strftime('%Y-%m-%d %H:%M') %></small>
+                <p><%= chat.user.name %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <h2 class="center">There is nothing in here.</h2>
+    <% end %>
+    
+  </div>
+</div>

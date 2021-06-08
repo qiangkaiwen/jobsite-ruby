@@ -1,0 +1,24 @@
+<div class="col-md-6">
+  <h4>Number of jobs per categories</h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>category</th>
+      <th>counts</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%	 index = 0 %>
+    <%	 @per_category_tasks.each do |per_category| %>
+        <tr>
+          <th scope="row"><%=	 index = index + 1 %></th>
+          <td><%=	 per_category['category_name'] %></td>
+          <td><%=	 per_category['count(jobs.id)'] %></td>
+        </tr>
+    <%	 end %>
+    </tbody>
+  </table>
+
+</div>

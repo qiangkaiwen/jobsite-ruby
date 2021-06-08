@@ -1,0 +1,77 @@
+<%= render :file => 'hires/page-header' %>
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="portfolio-title">
+        <div class="row">
+          <% if @job.user_id == session[:user]['id'] && @job.state_id != 4 %>
+          <div class="col-md-1">
+            <input type='hidden' id='input_suspend' value='<%= @job.id %>' />
+            <a id="a_suspend" class="btn btn-primary">wanna suspend?</a>
+          </div>
+          <% end %>
+          <div class="col-md-9 center">
+            <h2 class="mb-none"><%= @job.title %></h2>
+          </div>
+          <div class="col-md-2 pull-right">
+            <span><a class="label label-<%= @job.state.state_color %>" style="font-size: 16px"><%= @job.state.state_name %></a></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="tall">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <div>
+        <ul class="portfolio-details">
+          <li>
+            <p><strong>Client:</strong><%= @job.user.name %></p>
+          </li>
+        </ul>
+        <span class="img-thumbnail">
+          <img alt="" style="height: 80px; width: 80px;" src='<%= "/assets/users/"+@job.user.image_url %>'>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="portfolio-info">
+        <div class="row">
+          <div class="col-md-12 center">
+            <ul>
+              <li>
+                <a href="#" data-tooltip data-original-title="Like"><i class="fa fa-comments"></i><%= @hires.length %>
+                </a>
+              </li>
+              <li>
+                <i class="fa fa-calendar"></i> <%= @job.reg_date.to_datetime.strftime('%Y-%m-%d %H:%M') %>
+              </li>
+              <li>
+                <i class="fa fa-tags"></i> <a href="#"><%= @job.category.category_name %></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h4 class="heading-primary">Project <strong>Description</strong></h4>
+      <p class="mt-xlg"><%= @job.description %></p>
+      <ul class="portfolio-details">
+        <li>
+          <p><strong>Skills:</strong></p>
+          <ul class="list list-inline list-icons">
+            <%	 @job.skills.split(' ').each do |skill| %>
+              <li><i class="fa fa-check-circle"></i> <%= skill %></li>
+            <%	 end %>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <%= render 'comments' %>
+  <% if @user_can_bid %>
+      <%= render 'form' %>
+  <% end %>
+</div>

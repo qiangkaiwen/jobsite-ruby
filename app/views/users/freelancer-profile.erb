@@ -1,0 +1,38 @@
+<h3>Hire History</h3>
+
+<% if @hire_per_user.length > 0 %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>State</th>
+        <th>Related job</th>
+        <th>Date</th>
+        <th>Client</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <% @hire_per_user.each do |hire| %>
+              <% if hire.state_id == 1 %>
+                  <i class="fa fa-paper-plane" data-plugin-tooltip data-original-title="New"></i>
+              <% elsif hire.state_id == 2 %>
+                  <i class="fa fa-check" data-plugin-tooltip data-original-title="Finish"></i>
+              <% elsif hire.state_id == 3 %>
+                  <i class="fa fa-history" data-plugin-tooltip data-original-title="Hired"></i>
+              <% elsif hire.state_id == 4 %>
+                  <i class="fa fa-exclamation" data-plugin-tooltip data-original-title="Suspend"></i>
+              <% elsif hire.state_id == 5 %>
+                  <i class="fa fa-exclamation" data-plugin-tooltip data-original-title="Invitation"></i>
+              <% end %>
+              </td>
+              <td><%= hire.job.title %></td>
+              <td><%= hire.job.reg_date.to_datetime.strftime('%Y-%m-%d %H:%M') %></td>
+              <td><%= hire.job.user.name %></td>
+              </tr>
+          <% end %>
+          </tbody>
+    </table>
+<% else %>
+    <h4>No Hires</h4>
+<% end %>

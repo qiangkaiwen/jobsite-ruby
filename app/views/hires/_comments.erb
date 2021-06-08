@@ -1,0 +1,53 @@
+<div class="row">
+  <div class=" col-md-1"></div>
+  <div class=" col-md-10">
+    <div class="divider">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+
+    <h3 class="heading-primary"><i class="fa fa-comments"></i>Bids (<%= @hires.length %>)</h3>
+
+    <% @hires.each do |hire| %>
+    <ul class="comments">
+      <li>
+        <div class="comment">
+          <div class="img-thumbnail">
+            <img class="avatar" alt="" src='<%= "/assets/users/" + hire.user.image_url %>'>
+          </div>
+          <div class="comment-block">
+            <span class="comment-by">
+              <strong>
+                <a href="/users/<%= hire.user.id %>"><i class="fa fa-user"></i> <%= hire.user.name %></a>
+                <span class="date"><%= hire.reg_date.to_datetime.strftime('%Y-%m-%d %H:%M') %></span>
+                <% if hire.state.id == 5 %>
+                <span style="padding-left:10px"><i class="fa fa-hand-o-left"></i></span>
+                <% end %>
+              </strong>
+              <span class="pull-right">
+                <span>
+                  <% if hire.state.id == 1 and @job.state.id == 1 and @current_client %>
+                  <a onclick="do_invite(<%= hire.id %>)" id="<%= hire.id %>" href="#" class="invitation-btn"><i
+                      class="fa fa-reply"></i> Invitation</a>
+                  <% elsif hire.state.id == 5 && @job.state.id == 1 and @current_client %>
+                  <a href="/hires/<%= hire.id %>/hire"><i class="fa fa-heart"></i> Hire</a>
+                  <% elsif hire.state.id == 3 %>
+                  <a href="#" class="label label-<%= hire.state.state_color %>">Hired</a>
+                  <% end %>
+                </span>
+              </span>
+            </span>
+            <% if @current_client or session[:user]['role'] == 'admin' %>
+            <p><%= hire.bid_content %></p>
+
+            <% else %>
+            <p><%= truncate(hire.bid_content.gsub(/<\/?.*?>/, ""), :length => 100, :omission => '... MORE') %></p>
+            <% end %>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+  <div class=" col-md-1"></div>
+</div>

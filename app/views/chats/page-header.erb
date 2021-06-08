@@ -1,0 +1,18 @@
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="breadcrumb">
+          <li><%=	 link_to 'Home', jobs_path %></li>
+          <li><%=	 link_to 'Contracts', rooms_path %></li>
+          <li class="active">Chats</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="font-size: 26px"><%= @job.title %> <small style="color: #00A8FF">By <%= @job.user.name %></small> </h1>
+      </div>
+    </div>
+  </div>
+</section>

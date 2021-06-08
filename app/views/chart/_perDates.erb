@@ -1,0 +1,24 @@
+<div class="col-md-6">
+  <h4>Number of jobs per clients</h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>name</th>
+      <th>counts</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%	 index = 0 %>
+    <%	 @per_client_tasks.each do |per_task| %>
+        <tr>
+          <th scope="row"><%=	 index = index + 1 %></th>
+          <td><%=	 per_task['name'] %></td>
+          <td><%=	 per_task['count(jobs.id)'] %></td>
+        </tr>
+    <%	 end %>
+    </tbody>
+  </table>
+
+</div>

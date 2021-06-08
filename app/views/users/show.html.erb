@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<%=	 render :file => 'users/page-header' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1">
+      <div >
+        <img style="height: 80px; width: 80px;" src='<%= '/assets/users/'+@user.image_url %>' />
+      </div>
+    </div>
+    <div class="col-md-11">
+
+      <h2 class="mb-none"><strong><%= @user.name %></strong></h2>
+      <h4 class="heading-primary"><%= @user.location %></h4>
+      <% if @edit_button_show == 1 %>
+          <%= link_to 'Edit', edit_user_path(@user) %>
+      <% end %>
+      <hr class="solid">
+      <h3>Skills</h3>
+      <%	 @user.skill.split(' ').each do |skill| %>
+          <span class="label label-lg label-warning"><%= skill %></span>
+      <%	 end %>
+
+      <hr class="solid">
+      <%	 if session[:user]['role'] == 'client' %>
+          <%=	 render :file => 'users/client-profile' %>
+      <%	 elsif session[:user]['role'] == 'freelancer' %>
+          <%=	 render :file => 'users/freelancer-profile' %>
+      <%	 end %>
+
+    </div>
+  </div>
+
+</div>

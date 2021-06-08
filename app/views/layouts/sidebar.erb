@@ -1,0 +1,29 @@
+<div class="col-md-3">
+  <aside class="sidebar">
+
+    <%=	 render :file=>'layouts/search-form' %>
+
+    <hr>
+
+    <h4 class="heading-primary">Categories</h4>
+
+    <ul class="nav nav-list mb-xlg">
+        <li ><a onclick="find_by_category(0)" class="side_bar_category" id="cate_0" href="#">All</a></li>
+      <%	 @categories.each do |category| %>
+          <li ><a onclick="find_by_category(<%= category.id %>)" class="side_bar_category" id=cate_<%= category.id %> href="#"><%=	 category.category_name %></a></li>
+      <%	 end %>
+    </ul>
+
+    <hr>
+
+    <h4 class="heading-primary">States</h4>
+
+    <ul class="nav nav-list mb-xlg">
+      <li><a onclick="find_by_state(0)" class="side_bar_state" id="state_0" href="#">All</a></li>
+      <%	 @states.each do |state| %>
+          <li><a onclick="find_by_state(<%= state.id %>)" class="side_bar_state" id=state_<%= state.id %> href="#"><%=	 state.state_name %></a></li>
+      <%	 end %>
+    </ul>
+
+  </aside>
+</div>

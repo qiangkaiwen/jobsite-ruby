@@ -1,0 +1,48 @@
+<%= render :file => 'chats/page-header' %>
+
+<div class="row">
+  <% if session[:user]['role'] == 'client' or session[:user]['role'] == 'admin' %>
+      <div class="col-md-2">
+        <aside class="sidebar">
+          <hr>
+          <h4 class="heading-primary">Invited Users</h4>
+          <ul class="nav nav-list mb-xlg">
+            <% @users.each do |user| %>
+                <li>
+                  <a class="invitation-users" id="<%= user.hire_id %>"><%= user.name %> 
+                    <% if user.unread_cnt > 0 %>
+                      <span class="tip">
+                        <%= user.unread_cnt %>
+                      </span>
+                    <% end %>
+                  </a>
+                </li>
+            <% end %>
+          </ul>
+          <hr>
+        </aside>
+      </div>
+  <% end %>
+  <div class="col-md-7">
+    <% if (session[:user]['role'] == 'client' or session[:user]['role'] == 'admin') and  @users.length != 0%>
+        <h2 id="non_chat" class="center">Please select user..</h2>
+    <% end %>
+    <% if @users.length == 0 %>
+        <h2 id="non_chat" class="center">No freelancers!</h2>
+    <% end %>
+    <div class="blog-posts" id="chats-content" style="overflow-y: auto; overflow-x:hidden; height: 400px">
+      <%= render 'message' %>
+    </div>
+    <%= render 'form' %>
+  </div>
+  <div class="col-md-3">
+    <div id="bid-content">
+        <%= render 'bid' %>
+    </div>
+  </div>
+  <% if (session[:user]['role'] == 'freelancer') %>
+    <input type="hidden" id="freelancer_hire_id" value="<%= @hire_id%>" />
+  <% end %>
+</div>
+
+<script src="/assets/chats.js"></script>

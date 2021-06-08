@@ -1,0 +1,36 @@
+<% @jobs.each do |job| %>
+<article class="post post-large">
+  <div class="post-date">
+    <span class="day"><%= job.reg_date.to_date.day %></span>
+    <span class="month"><%= job.reg_date.to_date.strftime('%b') %></span>
+  </div>
+  <div class="post-content">
+    <h2>
+      <a href="/hires/<%= job.id %>"><%= truncate(job.title.gsub(/<\/?.*?>/, ""), :length => 50) %></a>
+      <span><a href="#"
+          class="label label-<%= job.state.state_color %> pull-right"><%= job.state.state_name %></a></span>
+    </h2>
+    <p><%= truncate(job.description.gsub(/<\/?.*?>/, ""), :length => 255, :omission => '... MORE') %></p>
+    <div class="post-meta">
+      <span class="label label-primary"><%= job.category.category_name %></span>
+      <span><i class="fa fa-user"></i> By <a href="/users/<%= job.user.id %>"><%= job.user.name %></a> </span>
+      <% hires = Hire.where(:job_id => job.id).length %>
+      <span><i class="fa fa-comments"></i> <%= hires == 0 ? 'No' : hires %> Bids</span>
+      <span><i class="fa fa-calendar"></i> <%= job.reg_date.to_datetime.strftime('%Y-%m-%d %H:%M') %></span>
+      <a href="/hires/<%= job.id %>" class="read-more pull-right">Read more <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</article>
+<% end %>
+<div>
+  <div class="col-md-6">
+    <%= js_will_paginate @jobs %>
+  </div>
+  <p class="col-md-1" style="margin-bottom: 0px; padding-top: 1px; font-size: 20px;">pages</p>
+  <select id="jobCount" class="pull-left" style="margin-top: 1px; margin-left : 10px; font-size: 20px;" onclick="get_search_results()">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50 </option>
+  </select>
+</div>

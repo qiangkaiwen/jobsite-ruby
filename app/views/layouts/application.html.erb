@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Basic -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Upwork in Unit 2</title>
+  <%= csrf_meta_tags %>
+
+  <meta name="keywords" content="HTML5 Template"/>
+  <meta name="description" content="Porto - Responsive HTML5 Template">
+  <meta name="author" content="okler.net">
+
+
+</head>
+<body>
+  <div class="body">
+    <%= render :file => 'layouts/header' %>
+
+    <div role="main" class="main">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

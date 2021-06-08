@@ -1,0 +1,22 @@
+<input type="hidden" id="user_id" name="user_id" value="<%= session[:user]['id']%>">
+<input type="hidden" id="job_id" name="job_id" value="<%= @job.id %>">
+<input type="hidden" id="hire_id" name="hire_id" value="<%= @hire_id %>">
+<input type="hidden" id="is_freelancer" name="is_freelancer" value="<%= session[:user]['role'] %>">
+
+<!--<div class="form-group">-->
+<!--<div class="col-md-1"></div>-->
+<!--<div class="col-md-9">-->
+<!--<textarea class="form-control" rows="3" name="chat_content" id="chat_content"></textarea>-->
+<!--</div>-->
+<!--<div class="col-md-2">-->
+<!--<button id="post" class="btn btn-primary btn-lg" style="margin-top:10px">Post</button>-->
+<!--</div>-->
+<!--</div>-->
+<%	 if session[:user]['role'] != 'admin' %>
+<div class="input-group">
+  <input class="form-control" placeholder="Please Input Message" name="chat_content" id="chat_content" type="text">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" id="post" type="submit">Go!</button>
+  </span>
+</div>
+<% end %>

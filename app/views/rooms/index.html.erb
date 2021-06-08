@@ -1,0 +1,41 @@
+<%=	 render :file => 'rooms/page-header' %>
+
+<div class="row">
+  <div class="featured-boxes col-md-9">
+    <div class="row">
+    <% @jobs_per_user.each do |job| %>
+      <div class="col-md-4 col-sm-6">
+        <div class="featured-box featured-box-primary featured-box-effect-1 mt-xlg">
+          <div class="box-content">
+
+            <a href="/chats/<%= job.id %>">
+              <i class="icon-featured fa fa-user" 
+                <% if session[:user]['role'] == 'freelancer' && job.invitation_read == 0 %> style="background-color:red"<% end %>
+              ></i>
+            </a>
+
+            <h4 class="text-uppercase"><%= truncate(job.title, :length => 15, :separator => ' ')  %></h4>
+            <p><span><a href="#" class="btn btn-xs btn-primary"><%= job.category.category_name %></a></span></p>
+            <p><span><i class="fa fa-user"></i> By <a href="#"><%= job.user.name %></a> </span></p>
+            <span><i class="fa fa-calendar"></i> <%= job.reg_date.to_datetime.strftime('%Y-%m-%d %H:%M') %></span>
+            <%	hires = Hire.where(:job_id => job.id).length %>
+            <p><span><i class="fa fa-comments"></i> <a href="#"><%= hires == 0 ? 'No':hires %> Bids</a></span></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%	 if @jobs_per_user.length == 0 %>
+      <div class="row mt-xlg">
+        <div class="col-md-12">
+          <div class="heading heading-border heading-middle-border heading-middle-border-center">
+            <h1><strong>Sorry!</strong> No room</h1>
+          </div>
+        </div>
+      </div>
+    <%	 end %>
+    </div>
+  </div>
+
+  <%=	 render :file =>'rooms/sidebar' %>
+</div>
+<script src="/assets/rooms.js"></script>

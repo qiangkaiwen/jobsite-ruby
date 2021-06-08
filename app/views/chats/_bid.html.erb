@@ -1,0 +1,17 @@
+<div>
+    <div>
+        <% if @hire != nil %>
+        <% if session[:user]['role'] == 'client' %>
+            <button onclick='kick_clicked(<%= @hire.user.id %>)' class='kick_out btn btn-3d btn-danger mr-xs mb-sm'>
+                <i class='fa fa-sign-out'></i> Kick out
+            </button>
+            <h4 class='footer-ribbon'><span class='alternative-font'><%= @hire.user.name %> 's Bid</span></h4>
+            <p><%= @hire.bid_content %></p>
+        <% end %>
+        <% end %>
+        <% if session[:user]['role'] == 'freelancer' %>
+            <h4 class='footer-ribbon'><span class='alternative-font'>Job Description</span></h4>
+            <p><%= @job.description %></p>
+        <% end %>
+    </div>
+</div>

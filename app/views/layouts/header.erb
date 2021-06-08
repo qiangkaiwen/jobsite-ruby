@@ -1,0 +1,87 @@
+<%= render :file => 'layouts/import-css' %>
+<header id="header" class="narrow" style="min-height:45px;" data-plugin-options='{"alwaysStickyEnabled": true, "stickyEnabled": true, "stickyWithGap": false, "stickyChangeLogoSize": false}'>
+<div class="container" style="height:45px;">
+  <div class="logo" style="padding:0px 0px 8px 0px;">
+    <a href="/">
+      <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40" src="/assets/upworkLogo.png">
+    </a>
+  </div>
+</div>
+
+<div class="navbar-collapse nav-main-collapse collapse">
+  <div class="container">
+    <nav class="nav-main mega-menu">
+      <ul class="nav nav-pills nav-main" id="mainMenu" >
+        <% if session[:user] %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#">
+                Job
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Job list', jobs_path %></li>
+                <% if session[:user]['role'] == 'client' %>
+                    <li><%= link_to 'New job', new_job_path %></li>
+                <% end %>
+              </ul>
+            </li>
+        <% end %>
+
+
+        <% if session[:user] %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" id="contract-menu">
+                Contract
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Contract list', '/rooms' %></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <%= link_to 'Statistic', '/chart/index' %>
+            </li>
+            <% if session[:user]['name'] == 'admin' %>
+                <li class="dropdown">
+                  <%= link_to 'Users', '/users/management' %>
+                </li>
+            <% end %>
+            <% if session[:user]['role'] == 'client' %>
+                <li class="dropdown">
+                  <%= link_to 'Categories', '/categories' %>
+                </li>
+            <% end %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#">
+                <%= session[:user]['name'] %>(<%= session[:user]['role'] %>)
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Profile', user_path(session[:user]['id']) %></li>
+                <li><%= link_to 'Log out', users_path %></li>
+              </ul>
+            </li>
+        <% end %>
+
+        <% if not session[:user] %>
+            <li class="dropdown mega-menu-item mega-menu-signin signin" id="headerAccount">
+              <a class="dropdown-toggle" href="#">
+                <i class="fa fa-user"></i> Sign In
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <div class="mega-menu-content">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <%= render :file => 'layouts/signin-form' %>
+                        <%= render :file => 'layouts/signup-form' %>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>
+</header>
+<%= render :file => 'layouts/import-js' %>

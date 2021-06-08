@@ -1,0 +1,25 @@
+<%= render :file=>'jobs/page-header' %>
+<p style=" color: red; font-size: 32px;"><%=@notice%></p>
+<div class="row">
+  <div class="col-md-9">
+    <div id="job_list" class="blog-posts">
+      <%= render :file=>'jobs/jobs' %>
+      
+    </div>
+
+    
+    <!-- this is old way to employ pagenation -->
+    <!-- <div>
+      <p id="dynamic_pager_demo2" class="col-md-5">
+      </p>
+      <p class="col-md-1" style="margin-bottom: 0px; padding-top: 21px;">pages</p>
+      <select id="jobCount" class="pull-left" style="margin-top: 23px;" onclick="change_PageCount()">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50 </option>
+      </select>
+    </div> -->
+  </div>
+  <%= render :file=>'layouts/sidebar' %>
+</div>

@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4>Users</h4>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Skill</th>
+        <th>Used</th>
+        <th>SignUp Date</th>
+        <th>Address</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%	 index = 0 %>
+      <%	 @users.each do |user| %>
+      <tr>
+        <th scope="row">
+          <%=	 index = index + 1 %>
+        </th>
+        <td>
+          <%=	 user.name %>
+        </td>
+        <td>
+          <%=	 user.role %>
+        </td>
+        <td>
+          <%=	 user.skill %>
+        </td>
+        <td>
+          <select class="user_used" id="<%=	user.id %>">
+            <option <%	if user.used == 1 %> selected <% end %>>true</option>
+            <option <%	if user.used == 0 %> selected <% end %>>false</option>
+          </select>
+        </td>
+        <td>
+          <%=	 user.created_at %>
+        </td>
+        <td>
+          <%=	 user.address %>
+        </td>
+      </tr>
+      <%	 end %>
+      </tbody>
+    </table>
+  </div>
+</div>

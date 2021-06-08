@@ -1,0 +1,37 @@
+
+<div class="login-div">
+  <div>
+    <label class="login-label">UserName</label>
+    <input name="username" type="text" placeholder="UserName...">
+  </div>
+  <div>
+    <label class="login-label">Password</label>
+    <input name="password" type="password" placeholder="Password...">
+  </div>
+  <div>
+      <a href="/" style="padding-left:10px; ">Back</a>
+      <button class="user_select_submit" style="margin-left:45% ; margin-bottom:10px;" >Login</button>
+  </div>
+</div>
+<div class="table-div">
+  <table>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          <a>
+            <img src='<%= "/assets/users/anonymous.png" %>' class="avatar-80" />
+          </a>
+        </td>
+        <td class="username" style="padding-left:15px"><p class="table-p"><%= user.name %></p></td>
+        <% if session[:user] && session[:user]['role'] != 'user' %>
+          <td style="padding-left:15px"><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td style="padding-left:15px"><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

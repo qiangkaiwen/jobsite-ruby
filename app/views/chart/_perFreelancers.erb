@@ -1,0 +1,28 @@
+<div class="col-md-6">
+  <h4>Number of bids/hired per freelancers</h4>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>name</th>
+      <th>bids</th>
+      <th>hires</th>
+      <th>rate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%	 index = 0 %>
+    <%	 @per_freelancer_bid_tasks.each do |per_freelancer| %>
+        <tr>
+          <th scope="row"><%=	 index = index + 1 %></th>
+          <td><%=	 per_freelancer['name'] %></td>
+          <td><%=	 per_freelancer['_bids'] %></td>
+          <td><%=	 per_freelancer['hired'] %></td>
+          <td><%=	(per_freelancer['_bids'] != 0)?(per_freelancer['hired'].to_f / per_freelancer['_bids'].to_f * 100).floor: '0' %>%</td>
+        </tr>
+    <%	 end %>
+    </tbody>
+  </table>
+
+</div>
